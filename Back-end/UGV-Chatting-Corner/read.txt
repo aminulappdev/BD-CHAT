@@ -1,0 +1,37 @@
+1. registration
+2. login
+3. session create and store 
+4. create middleware for authentication
+5. template integrated
+6. Socket connect
+7. online status change
+
+8. One to one chat 
+ 1. Create static chat container 
+            {
+                <div class="current-user-chat"><h5>Hi</h5></div>
+                <div class="distance-user-chat"><h5>Hi</h5></div>
+            }
+ 2. fetch receiver id from client side
+ 3. create route and function for save-chat and store database(MongoDB)
+ 4. save chat of user 
+ 5. current user sms show
+ 6. another user sms show using Socket
+ 7. load old chat and scrollable problem fixed
+ 8. delete chat
+
+9. Multi dynamic chat 
+  1. Separet js file
+  2. cookie set 
+  3. members table create
+  4. member view
+  5. add member in members table
+  6. update members
+  7. delete members
+  8. Update Group
+  9. Delete Group
+  10. Create sharable link
+  11. Apply terms and condition
+  12. Join group using link
+  
+ 

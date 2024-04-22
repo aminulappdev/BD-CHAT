@@ -39,6 +39,7 @@ dependencies:
   camera: 
   path_provider: 
   path: 
+  socket_io_client: ^2.0.3+1
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,80 @@
+<%- include('./layout/header.ejs') %>
+
+    <h2 class="mb-4">Hii, <%= user.name %>
+    </h2>
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <% if (users.length> 0)
+                    {
+                    for (let i = 0; i < users.length; i++) { %>
+                        <li class="list-group-item list-group-item-dark cursor-pointer user-list"
+                            data-id="<%= users[i]['_id'] %>">
+                            <img src="<%= 'http://localhost:4000/' + users[i]['image'] %>" alt="" width="50px"
+                                height="50px">
+
+                            <%= users[i]['name'] %>
+
+                                <% if(users[i]['is_online']==1) { %> <sup class="online_status"
+                                        id="<%= users[i]['_id'] %>-status">Online</sup>
+                                    <% } else { %> <sup class="offline_status"
+                                            id="<%= users[i]['_id'] %>-status">Offline</sup>
+                                        <% } %>
+                            <div></div>
+                        </li>
+                        <% } } %>
+
+
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <h3 class="start-head">Click to start the chat</h3>
+            <div class="chat-section">              
+                <div id="chat-container">
+
+                </div>
+
+                <form action="" id="chat-form">
+                    <input type="text" name="message" placeholder="Enter message" id="message" class="border" required>
+                    <input type="submit" value="Send message" class="btn btn-primary ">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteChatModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete chat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="delete-chat-form">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="delete-message-id">
+                        <p>Are you sure you want to delete ?</p>
+                        <p><b id="delete-message"></b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+    </script>
+
+
+    <%- include('./layout/footer.ejs') %>

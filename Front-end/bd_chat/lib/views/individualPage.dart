@@ -1,10 +1,10 @@
-
 import 'package:bd_chat/model/chatmodel.dart';
 import 'package:bd_chat/views/Camera/camera_page.dart';
 import 'package:bd_chat/views/Custom%20UI/ownMessageCard.dart';
 import 'package:bd_chat/views/Custom%20UI/replyMessage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class IndvidualPage extends StatefulWidget {
   IndvidualPage({super.key, required this.chatModel});
@@ -14,12 +14,36 @@ class IndvidualPage extends StatefulWidget {
 }
 
 class _IndvidualPageState extends State<IndvidualPage> {
+   IO.Socket? socket;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    connect();
+    super.initState();
+  }
+
+  void connect() {
+    
+    socket = IO.io("http://localhost:5000", <String, dynamic>{
+      "transports": ["websocket"],
+      "autoConnect": false,
+    });
+    socket!.connect();
+    socket!.onConnect((data) {
+      print("Connected flutter");
+    });
+    print(socket!.connected);
+    socket!.emit('/test',"Hello sir");
+     
+  }
+
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: PreferredSize( 
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(_height / 14),
         child: AppBar(
           shape: RoundedRectangleBorder(
@@ -107,31 +131,30 @@ class _IndvidualPageState extends State<IndvidualPage> {
         child: Stack(
           children: [
             Container(
-              height: _height - 150,
-              child: ListView(
-                shrinkWrap: true,
-                children: [ 
-                  OwnMessageCard(),
-                  ReplyCard(),
-                  OwnMessageCard(),
-                  ReplyCard(),
-                  OwnMessageCard(),
-                  ReplyCard(),
-                   OwnMessageCard(),
-                  ReplyCard(),
-                  OwnMessageCard(),
-                  ReplyCard(),
-                  OwnMessageCard(),
-                  ReplyCard(),
-                   OwnMessageCard(),
-                  ReplyCard(),
-                  OwnMessageCard(),
-                  ReplyCard(),
-                  OwnMessageCard(),
-                  ReplyCard(),
-                ],
-              )),
-
+                height: _height - 150,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    OwnMessageCard(),
+                    ReplyCard(),
+                    OwnMessageCard(),
+                    ReplyCard(),
+                    OwnMessageCard(),
+                    ReplyCard(),
+                    OwnMessageCard(),
+                    ReplyCard(),
+                    OwnMessageCard(),
+                    ReplyCard(),
+                    OwnMessageCard(),
+                    ReplyCard(),
+                    OwnMessageCard(),
+                    ReplyCard(),
+                    OwnMessageCard(),
+                    ReplyCard(),
+                    OwnMessageCard(),
+                    ReplyCard(),
+                  ],
+                )),
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
@@ -169,11 +192,14 @@ class _IndvidualPageState extends State<IndvidualPage> {
                                 children: [
                                   IconButton(
                                     onPressed: () {},
-                                     icon: Icon(Icons.attach_file),
+                                    icon: Icon(Icons.attach_file),
                                   ),
                                   IconButton(
                                       onPressed: () {
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CameraPage()));
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CameraPage()));
                                       },
                                       icon: Icon(Icons.camera_alt))
                                 ],

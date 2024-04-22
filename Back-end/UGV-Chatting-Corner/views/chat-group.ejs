@@ -1,0 +1,91 @@
+<%- include('./layout/header.ejs') %>
+
+    <h2 class="mb-4">Group Chatting</h2>
+
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <% if (myGroups.length> 0)
+                    {
+                        for (let i = 0; i < myGroups.length; i++)
+                        {
+                            %>
+                                <li class="list-group-item list-group-item-dark cursor-pointer group-list"
+                                    data-id="<%= myGroups[i]['_id'] %>">
+                                    <img src="/<%= myGroups[i]['image'] %>" alt="" width="50px"
+                                        height="50px">
+                                    <%= myGroups[i]['name'] %>                              
+                                </li>
+                            <% 
+                        } 
+                    } 
+                %>
+                
+                <!-- Show Joined Group  -->  
+                <% if (joinedGroups.length> 0)
+                    {
+                        for (let i = 0; i < joinedGroups.length; i++)
+                        {
+                            %>
+                                <li class="list-group-item list-group-item-dark cursor-pointer group-list"
+                                    data-id="<%= joinedGroups[i]['group_id']['_id'] %>">
+                                    <img src="/<%= joinedGroups[i]['group_id']['image'] %>" alt="" width="50px"
+                                        height="50px">
+                                    <%= joinedGroups[i]['group_id']['name'] %>                              
+                                </li>
+                            <% 
+                        } 
+                    } 
+                %>
+
+                
+                
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <h3 class="group-start-head">Click to start the chat</h3>
+            <div class="group-chat-section">
+                <div id="group-chat-container">
+
+                </div>
+
+                <form action="" id="group-chat-form">
+                    <input type="text" name="message" placeholder="Enter message" id="group-message" class="border" required>
+                    <input type="submit" value="Send message" class="btn btn-primary ">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Delete Group Modal -->
+    <div class="modal fade" id="deleteGroupChatModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete chat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="delete-group-chat-form">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="delete-group-message-id">
+                        <p>Are you sure you want to delete ?</p>
+                        <p><b id="delete-group-message"></b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+   
+
+    <%- include('./layout/footer.ejs') %>
